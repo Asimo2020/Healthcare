@@ -1,6 +1,10 @@
 from rest_framework import serializers
-from .models import Doctor, Patient, Appointment, MedicalRecord
+from .models import User,Doctor, Patient, Appointment, MedicalRecord
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'role']
 class DoctorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
