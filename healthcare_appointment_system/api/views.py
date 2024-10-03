@@ -5,9 +5,13 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import Doctor, Patient, Appointment, MedicalRecord
 from .serializers import DoctorSerializer, PatientSerializer, AppointmentSerializer, MedicalRecordSerializer
+import logging
 
+logger = logging.getLogger(__name__)
 class DoctorViewSet(viewsets.ModelViewSet):
+    logger.error("hello")
     queryset = Doctor.objects.all()
+
     serializer_class = DoctorSerializer
     permission_classes = [IsAuthenticated]
                      
