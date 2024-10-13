@@ -2,8 +2,8 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
-from .models import Doctor, Patient, Appointment, MedicalRecord,Prescription
+# from rest_framework.permissions import IsAuthenticated
+from .models import Doctor, Patient, Appointment, MedicalRecord,Prescription,Bill
 from .serializers import DoctorSerializer, PatientSerializer, AppointmentSerializer, MedicalRecordSerializer,PrescriptionSerializer,BillSerializer
 import logging
 from .Permissions import *

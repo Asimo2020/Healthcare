@@ -27,7 +27,7 @@ class MedicalRecordSerializer(serializers.ModelSerializer):
 class BillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bill
-        fields = 'all'
+        fields = '__all__'
 
 class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
