@@ -23,9 +23,9 @@ class Appointment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     appointment_time = models.DateTimeField()
-    # status = models.CharField(max_length=20, default='Scheduled')
-    # choices=[('scheduled','Scheduled'),
-    #          ('completed', 'Completed')]
+    status = models.CharField(max_length=20, default='Scheduled')
+    choices=[('scheduled','Scheduled'),
+             ('completed', 'Completed')]
 
 class MedicalRecord(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
@@ -46,10 +46,4 @@ class Bill(models.Model):
     paid = models.BooleanField(default=False)
     status = models.CharField(max_length=10, choices=[('paid', 'Paid'), ('pending', 'Pending')])
 
-
-class AppointmentReport(models.Model):
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    appointment_date = models.DateTimeField()
-    notes = models.TextField()
 

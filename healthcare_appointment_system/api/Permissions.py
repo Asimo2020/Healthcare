@@ -1,13 +1,11 @@
-from rest_framework.permissions import BasePermission
+from rest_framework.permissions import permissions
 
-class IsAdmin(BasePermission):
+class IsAdmin(permissions.BasePermission):
     def has_permission(self, request, view):
-        return request.user.role == 'admin'
-
-class IsDoctor(BasePermission):
+         if request.method in permissions.SAFE_METHODS:
+            return True
+class IsDoctorOrReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
-        return request.user.role == 'doctor'
-
-class IsPatient(BasePermission):
-    def has_permission(self, request, view):
-        return request.user.role == 'patient'
+        if request.user.is_authenticated:
+            return request.user.is_staff or request.user.role == 'doctor'
+        return request.method in permissions.SAFE_METHODS
