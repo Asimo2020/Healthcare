@@ -32,9 +32,9 @@ class BillSerializer(serializers.ModelSerializer):
 class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
-        fields = 'all'
+        fields = '__all__'
 
 class PrescriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prescription
-        fields = 'all'
+        fields = '__all__'
