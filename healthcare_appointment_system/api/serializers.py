@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from .models import Doctor, Patient, Appointment, MedicalRecord,Bill,Prescription
+from .models import Doctor, Patient, Appointment, MedicalRecord,Bill,Prescription,User
 
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ['id', 'username', 'role']
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'role']
 class DoctorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
@@ -27,7 +27,21 @@ class MedicalRecordSerializer(serializers.ModelSerializer):
 class BillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bill
-        fields = '__all__'
+        
+        fields = ['id', 'Patient', 'amount', 'paid', 'status']
+        extra_kwargs = {
+            'status': {'required': False}}
+        
+    def validate_amount(self, value):
+        if value <= 0:
+            raise serializers.ValidationError("Amount must be greater than zero.")
+        return value
+
+    def validate(self, attrs):
+        if attrs.get('paid') and attrs.get('amount') > 0:
+            raise serializers.ValidationError("Paid bills should have an amount of zero.")
+        return attrs
+
 
 class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,4 +51,6 @@ class AppointmentSerializer(serializers.ModelSerializer):
 class PrescriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prescription
-        fields = '__all__'
+        
+        fields = ['id', 'Patient', 'doctor', 'medications', 'dosage', 'created_at']
+        read_only_fields = ['created_at']
