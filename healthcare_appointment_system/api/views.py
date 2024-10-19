@@ -19,7 +19,10 @@ class DoctorViewSet(viewsets.ModelViewSet):
 class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]  
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]  
+    filterset_fields = ['name', 'phone_number']  
+    ordering_fields = ['id', 'name', 'phone_number']  
 
 class AppointmentViewSet(viewsets.ModelViewSet):
     queryset = Appointment.objects.all()

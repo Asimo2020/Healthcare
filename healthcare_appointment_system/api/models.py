@@ -21,7 +21,11 @@ class Doctor(models.Model):
 class Patient(models.Model):
     name = models.CharField(max_length=100,default='Asimo')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    email = models.EmailField()
     phone_number = models.CharField(max_length=15)
+    address = models.TextField()  
+    date_of_birth = models.DateField()  
+    gender = models.CharField(max_length=10, choices=[('male', 'Male'), ('female', 'Female')])  
     medical_history = models.TextField()
     def __str__(self):
         return self.name

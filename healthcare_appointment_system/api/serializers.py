@@ -13,7 +13,7 @@ class DoctorSerializer(serializers.ModelSerializer):
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Patient
-        fields = '__all__'
+        fields = ['id', 'name', 'email', 'phone_number', 'address', 'date_of_birth', 'gender', 'medical_history']  
 
 class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
