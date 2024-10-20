@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import User  
 # Register your models here.
-
 from .models import User,Patient, Doctor, Appointment, MedicalRecord, Prescription, Bill
+from .admin_views import PatientAdmin 
+class PatientAdmin(admin.ModelAdmin):  
+    list_display = ('name', 'phone_number') 
+    search_fields = ('name',)  
 
 class PrescriptionAdmin(admin.ModelAdmin):
     list_display = ('Patient', 'doctor', 'dosage')
@@ -17,7 +19,7 @@ class CustomAdminSite(admin.AdminSite):
     index_title = 'Welcome to the Healthcare Admin Panel'
 
 admin.site.register(User)
-admin.site.register(Patient)
+admin.site.register(Patient, PatientAdmin)
 admin.site.register(Doctor)
 admin.site.register(Appointment)
 admin.site.register(MedicalRecord)

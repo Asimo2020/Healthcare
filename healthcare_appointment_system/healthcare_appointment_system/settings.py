@@ -11,14 +11,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-# from datetime import timedelta  
+from datetime import timedelta  
 
-# SIMPLE_JWT = {  
-#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # or any desired expiry time  
-#     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),  
-#     'ROTATE_REFRESH_TOKENS': True,  
-#     'BLACKLIST_AFTER_ROTATION': True,  
-# }
+SIMPLE_JWT = {  
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60000), 
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=90000),  
+    'ROTATE_REFRESH_TOKENS': True,
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

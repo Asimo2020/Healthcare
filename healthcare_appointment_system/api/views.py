@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views import View  
 
 # Create your views here.
 from rest_framework import viewsets,filters
@@ -15,7 +16,6 @@ class DoctorViewSet(viewsets.ModelViewSet):
 
     serializer_class = DoctorSerializer
     permission_classes = [IsAuthenticated]
-                     
 class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer

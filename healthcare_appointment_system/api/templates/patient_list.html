@@ -1,46 +1,29 @@
- 
-{% extends 'base.html' %}  
+{% extends "admin/base_site.html" %}  
+{% load static %}  
+<h1>All Patients</h1>  
 
-{% block content %}  
-<h1>Patient List (Total: {{ patients.count }})</h1>  
-
-<form method="GET" action="{% url 'patient-list' %}">  
-    <input type="text" name="search" placeholder="Search patients..." />  
-    <button type="submit">Search</button>  
-</form>  
+<!-- Link to add a new patient -->  
+<a href="{% url 'admin:add_patient' %}">Add Patient</a>  
 
 <table>  
     <thead>  
         <tr>  
-            <th>Patient ID</th>  
-            <th>Patient Name</th>  
-            <th>Age</th>  
-            <th>Phone</th>  
-            <th>Last Visit</th>  
-            <th>Status</th>  
-            <th>Actions</th>  
+            <th>Name</th>  
+            <th>Phone Number</th>  
+            <th>Medical History</th>  
         </tr>  
     </thead>  
     <tbody>  
         {% for patient in patients %}  
         <tr>  
-            <td>{{ patient.id }}</td>  
             <td>{{ patient.name }}</td>  
-            <td>{{ patient.date_of_birth|date:"Y"|add:"-1"|add:today.year|add:"" }}</td> <!-- Calculate Age -->  
             <td>{{ patient.phone_number }}</td>  
-            <td>{{ patient.last_visit }}</td>  
-            <td>{{ patient.status }}</td>  
-            <td>  
-                <a href="{% url 'patient-edit' patient.id %}">Edit</a>  
-                <form method="POST" action="{% url 'patient-delete' patient.id %}" style="display:inline;">  
-                    {% csrf_token %}  
-                    <button type="submit">Delete</button>  
-                </form>  
-            </td>  
+            <td>{{ patient.medical_history }}</td>  
+        </tr>  
+        {% empty %}  
+        <tr>  
+            <td colspan="3">No patients found.</td>  
         </tr>  
         {% endfor %}  
     </tbody>  
-</table>  
-
-<a href="{% url 'patient-add' %}">Add Patient</a>  
-{% endblock %}
+</table>
